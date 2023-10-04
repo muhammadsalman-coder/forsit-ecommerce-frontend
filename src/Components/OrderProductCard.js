@@ -1,6 +1,8 @@
 import { Button, Card, Divider, Grid, Stack, Typography } from "@mui/material"
 import React from "react"
 import { getDisplayPrice } from "../Screens/Orders/Orders"
+import { useDispatch } from "react-redux"
+import { addUpdateToCart } from "../Redux/Slices/common"
 
 const styles = {
   media: {
@@ -34,6 +36,10 @@ const styles = {
 }
 
 const OrderProductCard = ({ product }) => {
+  const dispatch = useDispatch()
+  const addingToCart = () => {
+    dispatch(addUpdateToCart(product))
+  }
   return (
     <>
       <Grid item md={3} xs={6}>
@@ -53,9 +59,12 @@ const OrderProductCard = ({ product }) => {
               direction={"row"}
               justifyContent={"space-between"}
               alignItems={"center"}
-              width={"100%"}>
+              width={"100%"}
+            >
               <Typography>{getDisplayPrice(product?.price)}</Typography>
-              <Button variant="outlined">Add Cart</Button>
+              <Button variant="outlined" onClick={addingToCart}>
+                Add Cart
+              </Button>
             </Stack>
           </Grid>
         </Card>
