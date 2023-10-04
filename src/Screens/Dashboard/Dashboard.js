@@ -7,11 +7,13 @@ import ListAltIcon from "@mui/icons-material/ListAlt"
 import InventoryIcon from "@mui/icons-material/Inventory"
 import { useGetStatsQuery } from "../../Api/Resources/order"
 import { getDisplayPrice } from "../Orders/Orders"
+import Loader from "../../Components/Loader"
 const Dashboard = () => {
   const theme = useTheme()
   const { data, isLoading, isFetching } = useGetStatsQuery()
   return (
     <>
+      {isLoading || isFetching ? <Loader /> : <></>}
       <Toolbar>
         <Typography variant="h2" color="gray" fontWeight={600}>
           Welcome to Dashboard
