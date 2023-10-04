@@ -8,7 +8,6 @@ export const productApi = api.injectEndpoints({
         var bodyFormData = new FormData()
         bodyFormData.append("name", data?.name)
         bodyFormData.append("price", data?.price)
-        bodyFormData.append("quantity", data?.quantity)
         bodyFormData.append("image", data?.productImage)
         console.log("bodyFormData", bodyFormData)
         return {
@@ -23,7 +22,7 @@ export const productApi = api.injectEndpoints({
       query: (data) => {
         console.log("data", data)
         var bodyFormData = new FormData()
-        const paramsKey = ["id", "name", "price", "quantity"]
+        const paramsKey = ["id", "name", "price"]
         for (const val of paramsKey) {
           if (data[val]) bodyFormData.append(val, data[val])
         }

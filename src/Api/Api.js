@@ -4,7 +4,7 @@ export const baseURl = "http://localhost:8080/"
 
 const Api = createApi({
   reducerPath: MAIN_API_REDUCER_KEY,
-  tagTypes: ["Products", "Orders"],
+  tagTypes: ["Products", "Orders", "Order"],
   baseQuery: fetchBaseQuery({
     baseUrl: baseURl
   }),

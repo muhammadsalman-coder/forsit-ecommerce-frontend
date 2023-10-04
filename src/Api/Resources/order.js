@@ -20,11 +20,18 @@ export const orderApi = api.injectEndpoints({
           ...data
         }
       }),
-      invalidatesTags: ["Orders"]
+      invalidatesTags: ["Orders", "Order"]
     }),
     getOrders: build.query({
       query: () => `/api/getOrders`,
       providesTags: ["Orders"]
+    }),
+    getOrder: build.query({
+      query: (id) => `/api/getOrder?id=${id}`,
+      providesTags: ["Order"]
+    }),
+    getStats: build.query({
+      query: () => `/api/getStats`
     })
   }),
   overrideExisting: false
@@ -33,5 +40,7 @@ export const orderApi = api.injectEndpoints({
 export const {
   usePlaceOrderMutation,
   useUpdateStatusMutation,
-  useGetOrdersQuery
+  useGetOrdersQuery,
+  useGetOrderQuery,
+  useGetStatsQuery
 } = orderApi

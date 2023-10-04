@@ -15,16 +15,10 @@ import {
 import React from "react"
 import * as Yup from "yup"
 import CloseIcon from "@mui/icons-material/Close"
-import { useFormik } from "formik"
-import {
-  useCreateProductMutation,
-  useDeleteProductMutation
-} from "../../Api/Resources/product"
+import { useDeleteProductMutation } from "../../Api/Resources/product"
 import { updateErrorMessage } from "../../Redux/Slices/common"
 import Loader from "../../Components/Loader"
 import { useDispatch } from "react-redux"
-// import * as YUP from "yup"
-// import { useFormik } from "formik"
 const StyledBox = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "50%",
@@ -38,32 +32,6 @@ const StyledBox = styled(Box)(({ theme }) => ({
   padding: "0 16px 16px 16px"
 }))
 
-const StyledButton = styled(Button)(({ bgColor, textColor, border }) => ({
-  borderRadius: "15px",
-  ...(border && { border: `1px solid ${border}` }),
-  backgroundColor: bgColor,
-  fontWeight: 600,
-  color: textColor,
-  "&:hover": {
-    backgroundColor: bgColor,
-    color: textColor,
-    opacity: 0.75
-  }
-}))
-const OutlinedInputStyled = styled(OutlinedInput)(() => ({
-  background: "#fff",
-  borderRadius: "15px",
-  "& input": {
-    padding: "8px 20px"
-  }
-}))
-
-const addProductSchema = {
-  name: Yup.string().required("field is required"),
-  price: Yup.number().required("field is required"),
-  quantity: Yup.number().required("field is required"),
-  image: Yup.string().required("field is required")
-}
 const DeleteProductModal = ({ handleClose, open, productId }) => {
   const [deleteProduct, { isLoading }] = useDeleteProductMutation()
   const dispatch = useDispatch()
