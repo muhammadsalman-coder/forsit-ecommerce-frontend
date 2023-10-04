@@ -43,13 +43,14 @@ function OrderItems({ items, merchantBvid }) {
         xs={12}
         justifyContent="space-between"
         alignItems="center">
-        {items.map((item, index) => (
-          <Grid item key={index} xs={12}>
-            <Grid className="printHandler">
-              <OrderItem item={item} merchantBvid={merchantBvid} />
+        {items?.length &&
+          items.map((item, index) => (
+            <Grid item key={index} xs={12}>
+              <Grid className="printHandler">
+                <OrderItem item={item} merchantBvid={merchantBvid} />
+              </Grid>
             </Grid>
-          </Grid>
-        ))}
+          ))}
       </Grid>
     </>
   )

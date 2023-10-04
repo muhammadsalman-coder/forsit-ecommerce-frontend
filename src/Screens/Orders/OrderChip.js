@@ -5,7 +5,7 @@ const OrderStatusColors = {
   Delivered: "#00A86B",
   Cancelled: "#F55353"
 }
-const OrderStatusMapped = {
+export const OrderStatusMapped = {
   Received: "Received",
   Delivered: "Delivered",
   Cancelled: "Cancelled"

@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/DeleteOutline"
 import QuantityCounter from "./QuantityCounter"
 import { getDisplayPrice } from "../Orders/Orders"
 import { useDispatch } from "react-redux"
+import { addUpdateToCart, removeFromCart } from "../../Redux/Slices/common"
 
 const styles = {
   cartItem: {
@@ -83,8 +84,28 @@ const styles = {
 
 function CartItems({ hideImages = false, cartItem, key }) {
   const dispatch = useDispatch()
-  const decrementCount = () => {}
-  const incrementCount = () => {}
+
+  const decrementCount = () => {
+    if (+cartItem?.quantity === 1) {
+      dispatch(removeFromCart({ ...cartItem }))
+      return
+    }
+
+    dispatch(
+      addUpdateToCart({
+        ...cartItem,
+        quantity: cartItem?.quantity ? +cartItem?.quantity - 1 : 0
+      })
+    )
+  }
+  const incrementCount = () => {
+    dispatch(
+      addUpdateToCart({
+        ...cartItem,
+        quantity: cartItem?.quantity ? +cartItem?.quantity + 1 : 0
+      })
+    )
+  }
   return (
     <Grid
       container
@@ -126,7 +147,10 @@ function CartItems({ hideImages = false, cartItem, key }) {
             </Grid>
           </Grid>
           <Grid container item alignItems="center">
-            <Button sx={styles.removeBtn} data-id="remove-product-btn">
+            <Button
+              sx={styles.removeBtn}
+              data-id="remove-product-btn"
+              onClick={() => dispatch(removeFromCart({ ...cartItem }))}>
               <DeleteIcon sx={styles.icons} />
               <Typography sx={styles.deleteText}>Remove</Typography>
             </Button>
@@ -142,7 +166,7 @@ function CartItems({ hideImages = false, cartItem, key }) {
         <Grid data-id="product-amount-btn" item xs={5} md={3}>
           <Typography sx={styles.price}>
             {getDisplayPrice(
-              (cartItem?.price * cartItem?.price).toFixed(0) || 0
+              (cartItem?.quantity * cartItem?.price).toFixed(0) || 0
             )}
           </Typography>
         </Grid>

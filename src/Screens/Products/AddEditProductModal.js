@@ -57,12 +57,10 @@ const OutlinedInputStyled = styled(OutlinedInput)(() => ({
 const addProductSchema = {
   name: Yup.string().required("field is required"),
   price: Yup.number().required("field is required"),
-  quantity: Yup.number().required("field is required"),
   image: Yup.string().required("field is required")
 }
 const initialValue = {
   name: "",
-  quantity: "",
   price: "",
   image: ""
 }
@@ -145,41 +143,21 @@ const AddEditProductModal = ({
               {touched.name && errors.name}
             </FormHelperText>
           </FormControl>
-          <Grid container>
-            <Grid item xs={6}>
-              <FormControl sx={{ my: 1 }} variant="outlined">
-                <OutlinedInputStyled
-                  placeholder="Price"
-                  name="price"
-                  type="text"
-                  value={values.price}
-                  onChange={handleChange}
-                  error={touched.price && Boolean(errors.price)}
-                  helperText={touched.price && errors.price}
-                />
-                <FormHelperText error={touched.price && Boolean(errors.price)}>
-                  {touched.price && errors.price}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={6} paddingLeft={1}>
-              <FormControl sx={{ my: 1 }} variant="outlined">
-                <OutlinedInputStyled
-                  placeholder="Quantity"
-                  name="quantity"
-                  type="text"
-                  value={values.quantity}
-                  onChange={handleChange}
-                  error={touched.quantity && Boolean(errors.quantity)}
-                  helperText={touched.quantity && errors.quantity}
-                />
-                <FormHelperText
-                  error={touched.quantity && Boolean(errors.quantity)}>
-                  {touched.quantity && errors.quantity}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-          </Grid>
+          <FormControl sx={{ my: 1 }} variant="outlined">
+            <OutlinedInputStyled
+              placeholder="Price"
+              name="price"
+              type="text"
+              value={values.price}
+              onChange={handleChange}
+              error={touched.price && Boolean(errors.price)}
+              helperText={touched.price && errors.price}
+            />
+            <FormHelperText error={touched.price && Boolean(errors.price)}>
+              {touched.price && errors.price}
+            </FormHelperText>
+          </FormControl>
+
           <FormControl fullWidth>
             <FormLabel htmlFor="image-input">Image</FormLabel>
             <OutlinedInput

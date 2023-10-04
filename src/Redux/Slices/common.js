@@ -23,11 +23,17 @@ export const commonSlice = createSlice({
           return prod
         })
       } else {
-        state.cart = [...state.cart, action.payload]
+        state.cart = [...state.cart, { ...action.payload, quantity: 1 }]
       }
     },
     removeFromCart(state, action) {
-      state.cart = state.cart.filter((prod) => prod.id !== action.payload?.id)
+      const cards = state.cart.filter((prod) => prod.id !== action.payload?.id)
+
+      state.cart = [...cards]
+      console.log("state.cart111", state.cart)
+    },
+    clearCart(state, action) {
+      state.cart = []
     }
   }
 })
@@ -37,6 +43,7 @@ export const {
   updateErrorMessage,
   updateAlertMessage,
   addUpdateToCart,
-  removeFromCart
+  removeFromCart,
+  clearCart
 } = commonSlice.actions
 export const getCartState = (state) => state?.commonSlice?.cart
